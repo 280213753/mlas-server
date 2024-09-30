@@ -6,8 +6,8 @@ spring:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://dev-mlas-db.cx2y4iws05f4.eu-north-1.rds.amazonaws.com:5432/postgres
-    username: postgres
+    url: jdbc:postgresql://dev-mlas-ins.cx2y4iws05f4.eu-north-1.rds.amazonaws.com:5432/postgres
+    username: mlas_user
     password: mlasdb123456
   redis:
     host: 172.16.210.173

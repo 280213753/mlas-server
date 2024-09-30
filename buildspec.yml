@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17  # 使用 Amazon Corretto 17 版本
+      docker: 18
+    commands:
+      - echo "Installing Maven..."
+      - apt-get update -y
+      - apt-get install -y maven  # 安装 Maven
+      - mvn --version  # 检查 Maven 版本
+
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 112155008109.dkr.ecr.eu-north-1.amazonaws.com
+
+  build:
+    commands:
+      - echo "Building the application with Maven..."
+      - mvn clean package -DskipTests  # 编译和打包应用，跳过测试
+      - echo "Building the Docker image..."
+      - docker build -t mlas-server .
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker tag dev/mlas-server:latest 112155008109.dkr.ecr.eu-north-1.amazonaws.com/dev/mlas-server:latest
+      - docker push 112155008109.dkr.ecr.eu-north-1.amazonaws.com/dev/mlas-server:latest
+
+artifacts:
+  files:
+    - target/*.jar  # 如果你需要保留构建的 JAR 文件
+  discard-paths: yes
