@@ -1,12 +1,12 @@
 spring:
-#  datasource:
-#    url: jdbc:mysql://172.16.210.173:3306/auth?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
-#    username: root
-#    password: password
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  datasource:
+  #    url: jdbc:mysql://172.16.210.173:3306/auth?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+  #    username: root
+  #    password: password
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://dev-mlas-ins.cx2y4iws05f4.eu-north-1.rds.amazonaws.com:5432/postgres
+    url: jdbc:postgresql://localhost:5432/db_pmlas?currentSchema=dbo
     username: mlas_user
     password: mlasdb123456
   redis:
@@ -14,7 +14,7 @@ spring:
     port: 6379
     password: spmiWVD&!BVQ
 server:
-  port: 8080
+  port: 8081
 
 mybatis-plus:
   configuration:

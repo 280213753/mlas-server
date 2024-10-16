@@ -3,11 +3,13 @@ package com.qcc.fuson.controller;
 import com.qcc.fuson.dto.AuthUser;
 import com.qcc.fuson.service.AuthUserService;
 import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthUserController {
 
     @Resource
@@ -22,5 +24,10 @@ public class AuthUserController {
     @GetMapping("/users")
     public AuthUser getUserByUsername(@RequestParam("username") String id) {
         return authService.findUserByUsername(id);
+    }
+
+    @GetMapping("/")
+    public String heathCheck() {
+        return "ok";
     }
 }

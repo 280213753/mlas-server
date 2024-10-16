@@ -3,13 +3,12 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17  # 使用 Amazon Corretto 17 版本
+      java: corretto17
     commands:
       - echo "Installing Maven..."
       - yum update -y
-      - yum install -y maven  # 安装 Maven
-      - mvn --version  # 检查 Maven 版本
-      - yum install -y bind-utils
+      - yum install -y maven
+      - mvn --version
       - yum install -y docker
       - sudo nohup dockerd &
       - sleep 5
@@ -18,7 +17,6 @@ phases:
   pre_build:
     commands:
       - echo Checking network connectivity...
-      - dig github.com
       - curl -I https://github.com
       - echo "Logging in to Amazon ECR..."
       - echo "Getting ECR login password..."
@@ -29,14 +27,14 @@ phases:
   build:
     commands:
       - echo "Building the application with Maven..."
-      - mvn clean package -DskipTests  # 编译和打包应用，跳过测试
+      - mvn clean package -DskipTests
       - echo "Building the Docker image..."
       - ls -la /var/run/docker.sock
       - whoami
       - groups
       - docker build -t mlas-server .
-      - if [ $? -ne 0 ]; then echo "Docker build failed, exiting..."; exit 1; fi  # 如果构建失败，退出
-      - docker images  # 列出所有 Docker 镜像，以确认镜像已创建
+      - if [ $? -ne 0 ]; then echo "Docker build failed, exiting..."; exit 1; fi
+      - docker images
       - echo "Docker image built."
 
   post_build:
@@ -48,5 +46,5 @@ phases:
 
 artifacts:
   files:
-    - target/*.jar  # 如果你需要保留构建的 JAR 文件
+    - target/*.jar
   discard-paths: yes

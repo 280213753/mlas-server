@@ -13,6 +13,12 @@ public class AuthUserServiceImpl implements AuthUserService {
     private AuthUserMapper authUserMapper;
     @Override
     public AuthUser findUserByUsername(String id) {
-        return authUserMapper.getUserById(id);
+        AuthUser authUser = new AuthUser();
+        if("1".equals(id)){
+            authUser.setId("1");
+            authUser.setUserName("张三");
+        }
+        return authUser;
+//        return authUserMapper.getUserById(id);
     }
 }
