@@ -14,7 +14,7 @@ spring:
     port: 6379
     password: spmiWVD&!BVQ
 server:
-  port: 8081
+  port: 8080
 
 mybatis-plus:
   configuration:
