@@ -41,8 +41,8 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker tag mlas-server:latest 112155008109.dkr.ecr.eu-north-1.amazonaws.com/dev/mlas-server:latest
-      - docker push 112155008109.dkr.ecr.eu-north-1.amazonaws.com/dev/mlas-server:latest
+      - docker tag mlas-server:latest 112155008109.dkr.ecr.eu-north-1.amazonaws.com/dev/mlas-server:dev-1.0.0
+      - docker push 112155008109.dkr.ecr.eu-north-1.amazonaws.com/dev/mlas-server:dev-1.0.0
 
 artifacts:
   files:
